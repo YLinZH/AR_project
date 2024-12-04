@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class CarControl : MonoBehaviour
 {
-    public float rotateSpeed = 90;
+    private float rotateSpeed = 90;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -19,7 +19,4 @@ public class CarControl : MonoBehaviour
         this.transform.Rotate(Vector3.up * Time.deltaTime * rotateSpeed, Space.Self);
     }
 
-    // private void FixUpdate(){
-    //     this.transform.Rotate(Vector3.up * Time.fixedDeltaTime * rotateSpeed, Space.Self);
-    // }
 }

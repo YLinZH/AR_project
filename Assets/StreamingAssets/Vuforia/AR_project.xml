@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <QCARConfig>
   <Tracking>
+    <ImageTarget name="car_video" size="1.000000 0.749035" />
+    <ImageTarget name="car_gray" size="1.000000 0.749035" />
+    <ImageTarget name="car_blue" size="1.000000 0.560000" />
+    <ImageTarget name="car_yellow" size="1.000000 1.000000" />
+    <ImageTarget name="car_puple" size="1.000000 1.000000" />
     <ImageTarget name="car_red" size="1.000000 0.584967" />
   </Tracking>
 </QCARConfig>
