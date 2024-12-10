@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class CarControl : MonoBehaviour
 {
-    public float autoRotateSpeed = 50f;
-    public float manualRotateSpeed = 0.5f; 
+    private float autoRotateSpeed = 50f;
+    private float manualRotateSpeed = 0.5f; 
     private bool isAutoRotating = true; 
     private Vector2 lastTouchPosition;
     private bool isDragging = false;
@@ -33,7 +33,7 @@ public class CarControl : MonoBehaviour
     // El usuario puede rotar el modelo manualmente
     private void HandleUserInput()
     {
-        
+
         if (Input.touchCount == 1)
         {
             Touch touch = Input.GetTouch(0);
