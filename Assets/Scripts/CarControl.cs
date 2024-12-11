@@ -60,7 +60,7 @@ public class CarControl : MonoBehaviour
     private void RotateModel(Vector2 deltaPosition)
     {
         float rotationX = deltaPosition.y * manualRotateSpeed;
-        float rotationY = -deltaPosition.x * manualRotateSpeed;
+        float rotationY = deltaPosition.x * manualRotateSpeed;
 
         transform.Rotate(Vector3.up, rotationY, Space.World);
         transform.Rotate(Vector3.right, rotationX, Space.World);

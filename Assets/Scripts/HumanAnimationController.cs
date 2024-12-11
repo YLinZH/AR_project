@@ -11,15 +11,6 @@ public class HumanAnimationController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.anyKey)
-        {
-            Debug.Log("Tecla detectada");
-        }
-        if (Input.GetMouseButton(0))
-        {
-            Debug.Log("Click detectado");
-        }
-
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
