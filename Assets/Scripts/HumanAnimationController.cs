@@ -11,15 +11,25 @@ public class HumanAnimationController : MonoBehaviour
     private Vector3 walkDirection;
     private bool isTurning = false;
 
+    private int waveCount = 5;
+    private Rect touchArea;
+
     public float turnSpeed = 5f;
 
     public Transform cameraTransform; // Reference to the camera
     public float rotationSpeed = 5f;  // Speed of character rotation
+
     void Start()
     {
         animator = GetComponent<Animator>();
         walkDirection = transform.forward;
         Debug.Log("forward " + transform.forward);
+
+        float screenWidth = Screen.width;
+        float screenHeight = Screen.height;
+
+        // Example: Center 50% of the screen width and full height
+        touchArea = new Rect(0, 0, screenWidth, screenHeight * 0.5f);
     }
 
     // Update is called once per frame
@@ -31,8 +41,7 @@ public class HumanAnimationController : MonoBehaviour
             toggleWalk();
         }
 
-        if (isWalking) WalkAndTurn();
-
+        // if (isWalking) WalkAndTurn();
 
         // if (Input.GetKeyDown(KeyCode.W))
         // {
@@ -43,32 +52,36 @@ public class HumanAnimationController : MonoBehaviour
         //     transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5f);
         //     animator.SetBool("wave", wave);
         // }
-
-        // if (Input.GetKeyDown(KeyCode.S))
-        // {
-        //     shoved = !shoved;
-        //     animator.SetBool("shoved", shoved);
-        // }
-
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+            if (Input.GetTouch(0).phase == TouchPhase.Began && IsTouchWithinArea(touch.position))
+            //if (Input.GetKeyDown(KeyCode.W))
+            {
+                toggleWave();
+            }
+        }
         //Debug.Log("Current Animation: " + GetAnimationName(animator.GetCurrentAnimatorStateInfo(0).shortNameHash));
     }
 
-    public void PlayAnimation()
-    {
-
-        Debug.Log("Current Animation: " + GetAnimationName(animator.GetCurrentAnimatorStateInfo(0).shortNameHash));
-    }
-
-    private void toggleWalk()
+    public void toggleWalk()
     {
         isWalking = !isWalking;
         animator.SetBool("isWalking", isWalking);
     }
 
-    private void toggleWave()
+    public void toggleWave()
     {
         wave = !wave;
         animator.SetBool("wave", wave);
+    }
+
+    private bool IsTouchWithinArea(Vector2 touchPosition)
+    {
+        // Convert touchPosition from screen coordinates (bottom-left origin) to GUI coordinates (top-left origin)
+        Vector2 guiPosition = new Vector2(touchPosition.x, Screen.height - touchPosition.y);
+
+        return touchArea.Contains(guiPosition);
     }
 
     private void WalkAndTurn()
@@ -81,9 +94,12 @@ public class HumanAnimationController : MonoBehaviour
         // Check if the character has walked the specified distance
         if (currentWalkDistance >= walkDistance)
         {
-            Debug.Log("distance reached and reset !!" + transform.forward);
             // Trigger the turn and reset walk distance
-            transform.rotation = Quaternion.Euler(0, 180f, 0);
+            transform.rotation = Quaternion.Euler(0, 90f, 0);
+
+
+            Debug.Log("distance reached and reset !!" + transform.forward);
+
             //walkDirection = -walkDirection;
             toggleWalk();
 

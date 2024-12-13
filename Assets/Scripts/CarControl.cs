@@ -46,9 +46,7 @@ public class CarControl : MonoBehaviour
             else if (touch.phase == TouchPhase.Moved && isDragging)
             {
                 Vector2 deltaPosition = touch.position - lastTouchPosition;
-
                 RotateModel(deltaPosition);
-
                 lastTouchPosition = touch.position;
             }
             else if (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled)
